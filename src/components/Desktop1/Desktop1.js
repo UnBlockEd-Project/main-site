@@ -26,11 +26,8 @@ function Desktop1() {
                 <div class='column'>
                     <h1> Map Degree Requirements</h1>
                     <h2>Starting Institution</h2>
-                <div class='column1'>
                     <Select options={institutions} defaultValue={{ label: "Instiution Name", value: 'generic institution' }}/>
-                </div>
                     <Select options={degrees}/>
-                    <hr/>
                     <h2>Target Institution</h2>
                     <Select options={institutions}/>
                     <Select options={degrees}/>
