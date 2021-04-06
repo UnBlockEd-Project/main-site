@@ -1,6 +1,7 @@
 import React from 'react';
 import './Desktop1.css';
 import Select from 'react-select'
+import Verification from '../Verification'
 
 {/* Add a function or something here that parses the institution list JSON and returns them in the form of the degrees */}
 
@@ -33,6 +34,15 @@ function Desktop1() {
                     <Select options={degrees}/>
                     <button> Let's Map It! </button>
                 </div>
+                {/* 
+
+                    If you want to test the Verification component, just replace the <div>...</div> code below with this
+
+                    <div class='column'>
+                        <Verification /> 
+                    </div>
+
+                */}
                 <div class='column'>
                     <h1> How To Use This Feature?</h1>
                     <h2> Select your current institution and the institution you </h2>
