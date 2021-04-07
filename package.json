@@ -3,12 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.1",
+    "@transmute/ed25519-signature-2018": "^0.6.1-unstable.10",
+    "@transmute/vc.js": "^0.2.1-unstable.10",
+    "ace-builds": "^1.4.12",
+    "brace": "^0.11.1",
+    "jsoneditor": "^9.3.0",
+    "jsoneditor-react": "^3.1.1",
     "react": "^17.0.1",
+    "react-ace": "^9.4.0",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
+    "react-select": "^4.3.0",
     "web-vitals": "^1.1.0"
   },
   "scripts": {

@@ -1,0 +1,25 @@
+.Header {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1em;
+  margin-bottom: 2em;
+  background-color: #3b4391;
+  color: #ffff;
+}
+
+.container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-right: 5em;
+}
+
+.logo {
+margin-right: 15em;
+width: 100px;
+height: 100px;
+}
+
+h2:hover {
+color: rgb(148, 148, 148);
+}
