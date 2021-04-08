@@ -1,4 +1,4 @@
 {
-  "presets": ["react", "@babel/preset-react"],
+  "presets": ["@babel/preset-react"],
   "plugins": ["vuera/babel"]
 }
