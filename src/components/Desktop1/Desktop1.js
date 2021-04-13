@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Desktop1.css';
 // import Select from 'react-select';
 import Verification from '../Verification';
-// import Demo from '../demo/Demo.vue';
+import Demo from '../demo/Demo.vue';
 import { VueInReact } from 'vuera';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -10,7 +10,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
+import planTermData from '../demo/planTermData';
+import kctcsData from './kctcs';
+import ncucs from './ncucs';
+import ekuphys from './ekuphys';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -23,6 +27,21 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginTop: 15,
   },
+  column: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    flexBasis: '100%',
+    flex: 1,
+    '& > *': {
+      minWidth: 1118,
+    },
+  },
+  header: {
+    marginTop: 50,
+    textAlign: 'center',
+    color: '#3b4391',
+  },
 }));
 
 {
@@ -30,37 +49,62 @@ const useStyles = makeStyles((theme) => ({
 }
 
 const sourceInstitutions = [
-  {
-    value: 'elizabethtown',
-    label: 'Elizabethtown Community & Technical College',
-  },
-  { value: 'ashland', label: 'Ashland Community & Technical College' },
-  { value: 'bluegrass', label: 'Bluegrass Community & Technical College' },
+  //   {
+  //     value: 'elizabethtown',
+  //     label: 'Elizabethtown Community & Technical College',
+  //   },
+  //   { value: 'ashland', label: 'Ashland Community & Technical College' },
+  { value: 'sandy', label: 'Big Sandy Community & Technical College' },
 ];
 
 const destInstitutions = [
-  { value: 'uk', label: 'University of Kentucky' },
-  { value: 'wku', label: 'Western Kentucky University' },
-  { value: 'murray', label: 'Murray State University' },
+  //   { value: 'uk', label: 'University of Kentucky' },
+  { value: 'eku', label: 'Eastern Kentucky University' },
+  { value: 'nku', label: 'Northern Kentucky University' },
 ];
 
 {
   /* This is not going to be as bad can construct the json myself (or hardcode into the const)*/
 }
 
-const degrees = [
+const sourceDegrees = [
+  { value: 'as', label: 'Associate in Science' },
+  //   { value: 'basketWeaving', label: 'Basket Weaving' },
+];
+
+const destDegrees = [
   { value: 'cs', label: 'Computer Science' },
-  { value: 'english', label: 'English' },
-  { value: 'basketWeaving', label: 'Basket Weaving' },
+  { value: 'physics', label: 'Physics' },
+  //   { value: 'basketWeaving', label: 'Basket Weaving' },
 ];
 
 function Desktop1() {
-  //   const Component = VueInReact(Demo);
+  const Component = VueInReact(Demo);
   const classes = useStyles();
   const [sourceInst, setSourceInst] = useState('');
   const [sourceProgram, setSourceProgram] = useState('');
   const [destInst, setDestInst] = useState('');
   const [destProgram, setDestProgram] = useState('');
+  const [result, setResult] = useState(null);
+
+  const handleSubmit = () => {
+    if (
+      sourceInst === 'sandy' &&
+      sourceProgram === 'as' &&
+      destInst === 'nku' &&
+      destProgram === 'cs'
+    ) {
+      setResult(1);
+    }
+    if (
+      sourceInst === 'sandy' &&
+      sourceProgram === 'as' &&
+      destInst === 'eku' &&
+      destProgram === 'physics'
+    ) {
+      setResult(2);
+    }
+  };
 
   return (
     <div class='Desktop1'>
@@ -91,7 +135,7 @@ function Desktop1() {
               onChange={(event) => setSourceProgram(event.target.value)}
               label='Program Name'
             >
-              {degrees.map((inst) => (
+              {sourceDegrees.map((inst) => (
                 <MenuItem value={inst.value}>{inst.label}</MenuItem>
               ))}
             </Select>
@@ -120,7 +164,7 @@ function Desktop1() {
               onChange={(event) => setDestProgram(event.target.value)}
               label='Program Name'
             >
-              {degrees.map((inst) => (
+              {destDegrees.map((inst) => (
                 <MenuItem value={inst.value}>{inst.label}</MenuItem>
               ))}
             </Select>
@@ -130,6 +174,7 @@ function Desktop1() {
             color='primary'
             className={classes.button}
             disabled={!(sourceInst && sourceProgram && destInst && destProgram)}
+            onClick={() => handleSubmit()}
           >
             Let's Map It!
           </Button>
@@ -143,15 +188,42 @@ function Desktop1() {
                     </div>
 
                 */}
-        <div class='column'>
-          <h1> How To Use This Feature?</h1>
-          <h2> Select your current institution and the institution you </h2>
-          <h2>are interested in transferring to. Then click “Let’s Map It!”</h2>
-          <h2> to learn how your credits will transfer.</h2>
-        </div>
-        {/* <div class='column'>
-          <Component />
-        </div> */}
+        {!result && (
+          <div class='column'>
+            <h1> How To Use This Feature?</h1>
+            <h2> Select your current institution and the institution you </h2>
+            <h2>
+              are interested in transferring to. Then click “Let’s Map It!”
+            </h2>
+            <h2> to learn how your credits will transfer.</h2>
+          </div>
+        )}
+        {result === 1 && (
+          <div className={classes.column}>
+            <Typography variant='h4' className={classes.header}>
+              4 Semesters at Big Sandy C&T
+            </Typography>
+            <Component planTermData={kctcsData} />
+            <Typography variant='h4' className={classes.header}>
+              4 Semesters at NKU
+            </Typography>
+
+            <Component planTermData={ncucs} />
+          </div>
+        )}
+        {result === 2 && (
+          <div className={classes.column}>
+            <Typography variant='h4' className={classes.header}>
+              4 Semesters at Big Sandy C&T
+            </Typography>
+            <Component planTermData={kctcsData} />
+            <Typography variant='h4' className={classes.header}>
+              4 Semesters at EKU
+            </Typography>
+
+            <Component planTermData={ekuphys} />
+          </div>
+        )}
       </div>
     </div>
   );

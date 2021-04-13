@@ -27,14 +27,17 @@ import vueDegreePlan, {
   formatTerms,
   getItemCourse,
 } from '@unm-idi/vue-degree-plan';
-import planTermData from './planTermData';
+// import planTermData from './planTermData';
 
 export default {
+  props: {
+    planTermData: Object,
+  },
   data() {
     return {
       selectedType: 'Plan',
       types: ['Plan', 'Grid', 'Graph'],
-      terms: formatTerms(planTermData),
+      terms: formatTerms(this.planTermData),
     };
   },
   components: {
