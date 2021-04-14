@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Desktop1.css';
 // import Select from 'react-select';
-import Verification from '../Verification';
+import Verification from '../../components/Verification';
 // import Demo from '../demo/Demo.vue';
 import { VueInReact } from 'vuera';
 import { makeStyles } from '@material-ui/core/styles';
