@@ -58,6 +58,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
     "@babel/eslint-plugin": "^7.13.10",
-    "@babel/preset-react": "^7.13.13"
+    "@babel/preset-react": "^7.13.13",
+    "html-webpack-plugin": "^5.3.1"
   }
 }
