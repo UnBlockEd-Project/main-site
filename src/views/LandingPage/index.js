@@ -1,14 +1,18 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Container } from '@material-ui/core';
+import { Container, Page } from '@material-ui/core';
 import Header from './Header';
+import { withRouter } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    display: 'flex',
     height: '100%',
-    marginTop: theme.spacing(7),
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
+    width: '100%',
+    flexDirection: 'row',
+    // marginTop: theme.spacing(7),
+    paddingTop: theme.spacing(5),
+    paddingBottom: theme.spacing(5),
   },
   statistics: {
     marginTop: theme.spacing(3),
@@ -24,11 +28,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Overview() {
+function Overview({ route }) {
   const classes = useStyles();
 
   return (
-    <Container maxWidth='lg' className={classes.root} title='Overview'>
+    <Container maxWidth='xl' className={classes.root} title='Overview'>
       <Header />
     </Container>
   );

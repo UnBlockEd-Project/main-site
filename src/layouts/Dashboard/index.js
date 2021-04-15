@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import { LinearProgress } from '@material-ui/core';
 import Header from './Header';
 import Footer from './Footer';
+import { withRouter } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -15,34 +16,34 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   content: {
-    paddingTop: 64,
+    paddingTop: 78,
+    paddingBottom: 68,
     flexGrow: 1,
     maxWidth: '100%',
     overflowX: 'hidden',
-    [theme.breakpoints.up('lg')]: {
-      paddingLeft: 256,
-    },
-    [theme.breakpoints.down('xs')]: {
-      paddingTop: 56,
-    },
+    // [theme.breakpoints.up('lg')]: {
+    //   paddingLeft: 256,
+    // },
+    // [theme.breakpoints.down('xs')]: {
+    //   paddingTop: 56,
+    // },
   },
 }));
 
-function Dashboard({ route }) {
+function Dashboard({ route, location }) {
   const classes = useStyles();
   const [openNavBarMobile, setOpenNavBarMobile] = useState(false);
-
   return (
     <>
       <Header onOpenNavBarMobile={() => setOpenNavBarMobile(true)} />
 
-      {/* <div className={classes.container}>
-        <div className={classes.content}> */}
-      <Suspense fallback={<LinearProgress />}>
-        {renderRoutes(route.routes)}
-      </Suspense>
-      {/* </div>
-      </div> */}
+      <div className={classes.container}>
+        <div className={classes.content}>
+          <Suspense fallback={<LinearProgress />}>
+            {renderRoutes(route.routes)}
+          </Suspense>
+        </div>
+      </div>
       <Footer />
     </>
   );

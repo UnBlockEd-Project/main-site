@@ -1,0 +1,395 @@
+{
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    {
+      "@context": {
+        "ex": "https://example.org/examples#",
+        "schema": "http://schema.org/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "student": "schema:Person",
+        "institution": "schema:CollegeOrUniversity",
+        "address": "schema:PostalAddress",
+        "addressLocality": "xs:string",
+        "addressRegion": "xs:string",
+        "postalCode": "xs:string",
+        "streetAddress": "xs:string",
+        "email": "xs:string",
+        "telephone": "xs:string",
+        "OPEID": "xs:string",
+        "givenName": "xs:string",
+        "city": "xs:string",
+        "state": "xs:string",
+        "familyName": "xs:string",
+        "additionalName": "xs:string",
+        "birthDate": "xs:date",
+        "studentID": "xs:string",
+        "degree": "ex:degree",
+        "course": "ex:course",
+        "grade": "xs:string",
+        "notes": "xs:string",
+        "degreesAwarded": "ex:degreesAwarded",
+        "academicRecord": "ex:academicRecord",
+        "academicProgram": "ex:academicProgram",
+        "semester": "ex:semester",
+        "term": "xs:string",
+        "year": "xs:integer",
+        "college": "xs:string",
+        "plan": "xs:string",
+        "conferDate": "xs:date",
+        "degreeGPA": "xs:decimal",
+        "coursesTaken": "ex:coursesTaken",
+        "coursesTransferred": "ex:coursesTransferred",
+        "credit": "xs:decimal",
+        "points": "xs:decimal",
+        "code": "xs:string",
+        "name": {
+          "@id": "schema:name",
+          "@type": "rdf:HTML"
+        }
+      }
+    }
+  ],
+  "id": "http://example.gov/credentials/3732",
+  "type": [
+    "VerifiableCredential",
+    "https://json-ld.org/playground/UniversityDegreeCredential"
+  ],
+  "credentialSubject": {
+    "id": "did:key:z6MkjjCpsoQrwnEmqHzLdxWowXk5gjbwor4urC1RPDmGeV8r",
+    "student": {
+      "givenName": "Joe",
+      "familyName": "Doe",
+      "additionalName": "",
+      "birthDate": "1996-03-10T04:24:12.164Z",
+      "studentID": "12345678"
+    },
+    "institution": {
+      "name": "Kentucky Community & Technical College System",
+      "email": "",
+      "telephone": "(877) 528-2748",
+      "OPEID": "001994",
+      "address": {
+        "city": "Versailles",
+        "state": "KY",
+        "postalCode": "40383",
+        "streetAddress": "300 North Main Street"
+      }
+    },
+    "degreesAwarded": [
+      {
+        "type": "degree",
+        "name": "Associate in Science",
+        "college": "ASHLAND COMMUNITY & TECHNICAL COLLEGE",
+        "conferDate": "05/10/2021",
+        "degreeGPA": 4,
+        "plan": "Associate in Science"
+      }
+    ],
+    "academicRecord": [
+      {
+        "semester": {
+          "term": "Fall",
+          "year": 2019
+        },
+        "academicProgram": {
+          "college": "ASHLAND COMMUNITY & TECHNICAL COLLEGE",
+          "plan": "Associate in Science"
+        },
+        "coursesTaken": [
+          {
+            "course": {
+              "code": "FYE 100",
+              "name": "Strategies for College Success",
+              "credit": 1,
+              "points": 4
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "CIT 105",
+              "name": "Introduction to Computers",
+              "credit": 3,
+              "points": 12
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "ENG 101",
+              "name": "Writing I",
+              "credit": 3,
+              "points": 12
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "MAT 146",
+              "name": "Contemporary College Math",
+              "credit": 3,
+              "points": 12
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "ANT 160",
+              "name": "Cultural Diversity in the Modern World",
+              "credit": 3,
+              "points": 12
+            },
+            "grade": "A",
+            "notes": ""
+          }
+        ],
+        "coursesTransferred": [
+          {
+            "course": {
+              "code": "COM 252",
+              "name": "Introduction to Interpersonal Communication",
+              "credit": 3,
+              "points": 0
+            },
+            "grade": "A",
+            "notes": "Notes go here.",
+            "institution": {
+              "name": "BIG SANDY COMMUNITY & TECHNICAL COLLEGE",
+              "email": "",
+              "telephone": "(606) 886-3863",
+              "OPEID": "00196800",
+              "address": {
+                "city": "Prestonsburg",
+                "state": "KY",
+                "postalCode": "41653",
+                "streetAddress": "1 Bert T. Combs Drive"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "semester": {
+          "term": "Spring",
+          "year": 2020
+        },
+        "academicProgram": {
+          "college": "ASHLAND COMMUNITY & TECHNICAL COLLEGE",
+          "plan": "Associate in Science"
+        },
+        "coursesTaken": [
+          {
+            "course": {
+              "code": "ENG 102",
+              "name": "Writing II",
+              "credit": 3,
+              "points": 12
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "COM 181",
+              "name": "Basic Public Speaking",
+              "credit": 3,
+              "points": 12
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "BIO 112",
+              "name": "Introduction to Biology",
+              "credit": 3,
+              "points": 12
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "BIO 113",
+              "name": "Introduction to Biology Lab",
+              "credit": 1,
+              "points": 4
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "HIS 101",
+              "name": "World Civilization I",
+              "credit": 3,
+              "points": 12
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "ART 100",
+              "name": "Introduction to Art",
+              "credit": 3,
+              "points": 12
+            },
+            "grade": "A",
+            "notes": ""
+          }
+        ]
+      },
+      {
+        "semester": {
+          "term": "Fall",
+          "year": 2020
+        },
+        "academicProgram": {
+          "college": "ASHLAND COMMUNITY & TECHNICAL COLLEGE",
+          "plan": "Associate in Science"
+        },
+        "coursesTaken": [
+          {
+            "course": {
+              "code": "PHI 250",
+              "name": "Symbolic Logic",
+              "credit": 3,
+              "points": 12
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "COM 249",
+              "name": "Mass Media Communication",
+              "credit": 3,
+              "points": 12
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "BIO 114",
+              "name": "Biology I",
+              "credit": 3,
+              "points": 12
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "BIO 115",
+              "name": "Biology Laboratory I",
+              "credit": 1,
+              "points": 4
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "UNKNOWN 100",
+              "name": "ELECTIVE",
+              "credit": 1,
+              "points": 4
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "UNKNOWN 100",
+              "name": "ELECTIVE",
+              "credit": 1,
+              "points": 4
+            },
+            "grade": "A",
+            "notes": ""
+          }
+        ]
+      },
+      {
+        "semester": {
+          "term": "Spring",
+          "year": 2021
+        },
+        "academicProgram": {
+          "college": "ASHLAND COMMUNITY & TECHNICAL COLLEGE",
+          "plan": "Associate in Science"
+        },
+        "coursesTaken": [
+          {
+            "course": {
+              "code": "MAT 151",
+              "name": "Intro to Applied Statistics",
+              "credit": 3,
+              "points": 12
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "BIO 116",
+              "name": "Biology II",
+              "credit": 3,
+              "points": 12
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "BIO 117",
+              "name": "Biology Laboratory II",
+              "credit": 1,
+              "points": 4
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "UNKNOWN 100",
+              "name": "ELECTIVE",
+              "credit": 1,
+              "points": 4
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "UNKNOWN 100",
+              "name": "ELECTIVE",
+              "credit": 1,
+              "points": 4
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "UNKNOWN 100",
+              "name": "ELECTIVE",
+              "credit": 1,
+              "points": 4
+            },
+            "grade": "A",
+            "notes": ""
+          }
+        ]
+      }
+    ]
+  },
+  "issuanceDate": "2020-03-10T04:24:12.164Z",
+  "issuer": "did:key:z6Mkf7FWHfJANm9n4hPMt3dmtAcqnkNuyJLHSovSMnfq4Wws"
+}

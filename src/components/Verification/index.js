@@ -15,12 +15,23 @@ import { documentLoader } from './documentLoader';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    marginTop: 35,
+    width: '75%',
     height: '100%',
+  },
+  verify: {
+    marginTop: 20,
+  },
+  disabled: {
+    marginTop: 20,
+    backgroundColor: theme.palette.verified,
   },
 }));
 
-export default function MultilineTextFields() {
+export default function MultilineTextFields({
+  handleVerificationStatus,
+  verified,
+}) {
   const classes = useStyles();
   const [jsonValue, setJsonValue] = useState(null);
   const [valid, setValid] = useState(false);
@@ -49,16 +60,25 @@ export default function MultilineTextFields() {
       });
     } catch (error) {
       //Verification failed for syntax reasons; perhaps because invalid JSON-LD
+      handleVerificationStatus({ verified: false, status: error.message });
       window.alert(`Failed: ${error.message}`);
     }
     if (!verification.verified) {
       //Verification failed for signature validity reasons; perhaps because the transcript was tampered with
       const { error } = verification;
       if (error && error.errors && error.errors[0]) {
+        handleVerificationStatus({
+          verified: false,
+          status: error.errors[0].message || error.errors[0],
+        });
         window.alert(`Failed: ${error.errors[0].message || error.errors[0]}`);
       }
     } else {
-      window.alert(`Verified!`);
+      handleVerificationStatus({
+        verified: true,
+        status: 'Verified!',
+        credential: JSON.parse(jsonValue),
+      });
     }
   };
 
@@ -99,8 +119,10 @@ export default function MultilineTextFields() {
         color='primary'
         disabled={!valid}
         onClick={handleVerify}
+        className={classes.verify}
+        disabled={verified}
       >
-        Verify
+        {verified ? 'Successfully Verified!' : 'Verify'}
       </Button>
     </form>
   );
