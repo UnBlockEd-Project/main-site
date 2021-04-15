@@ -17,13 +17,18 @@ export default [
     routes: [
       {
         path: '/home',
-        exact: true,
+        // exact: true,
         component: lazy(() => import('./views/Desktop1')),
       },
       {
         path: '/map',
         exact: true,
         component: lazy(() => import('./views/Desktop1')),
+      },
+      {
+        path: '/transfer',
+        exact: true,
+        component: lazy(() => import('./views/Desktop2')),
       },
       {
         component: () => <Redirect to='/errors/error-404' />,
