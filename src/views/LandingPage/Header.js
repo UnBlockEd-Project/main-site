@@ -40,10 +40,10 @@ function Header({ className, ...rest }) {
           {/* <Typography component='h2' gutterBottom variant='overline'>
             Home
           </Typography> */}
-          <Typography component='h1' gutterBottom variant='h3'>
+          <Typography component='h1' gutterBottom variant='h1'>
             You Deserve Some Credit!
           </Typography>
-          <Typography gutterBottom variant='subtitle1'>
+          <Typography gutterBottom variant='h4'>
             UnBlockEd's Curricular Analytics platform is here to help you plan
             your degree and articulate transfer credit to get as much value from
             your courses as possible!

@@ -13,6 +13,8 @@ import Verification from '../../components/Verification';
 import axios from '../../utils/axios';
 import clsx from 'clsx';
 import degreePlan from './new_plan';
+import Demo from '../../components/demo/Demo.vue';
+import { VueInReact } from 'vuera';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -43,6 +45,21 @@ const useStyles = makeStyles((theme) => ({
   },
   loadingColumn: {
     justifyContent: 'center',
+  },
+  column: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    flexBasis: '100%',
+    flex: 1,
+    '& > *': {
+      minWidth: 1118,
+    },
+  },
+  header: {
+    marginTop: 50,
+    textAlign: 'center',
+    color: '#3b4391',
   },
 }));
 
@@ -82,6 +99,7 @@ const degrees = [
 // ];
 
 function Desktop2() {
+  const Component = VueInReact(Demo);
   const classes = useStyles();
   const [sourceInst, setSourceInst] = useState('');
   const [sourceProgram, setSourceProgram] = useState('');
@@ -275,52 +293,16 @@ function Desktop2() {
 
   return (
     <div class='Desktop1'>
-      <div class='row'>
-        <div class='column'>
-          <Typography
-            variant='h1'
-            color='primary'
-            className={classes.h1}
-            align='center'
-          >
-            How To Use This Feature?
-          </Typography>
-          <Typography variant='h2' color='primary' align='center' gutterBottom>
-            {' '}
-            1. Provide a verifiable credential of your transcript credits.{' '}
-          </Typography>
-          <Typography
-            variant='h2'
-            color='primary'
-            align='center'
-            className={classes.h2}
-          >
-            2. Select your desired destination institution & program.{' '}
-          </Typography>
-          <Typography
-            variant='h2'
-            color='primary'
-            align='center'
-            className={classes.h2}
-          >
-            3. Let us analyze how your transfer credits can provide maximum
-            value towards your degree!{' '}
-          </Typography>
-          <Verification
-            handleVerificationStatus={setVerificationStatus}
-            verified={verified}
-          />
-        </div>
-        {!(analysis && analysis.loading) && (
+      {!(analysis && analysis.degreePlan) && (
+        <div class='row'>
           <div class='column'>
             <Typography
               variant='h1'
               color='primary'
               className={classes.h1}
               align='center'
-              gutterBottom
             >
-              Transfer Credit Evaluation
+              How To Use This Feature?
             </Typography>
             <Typography
               variant='h2'
@@ -328,67 +310,120 @@ function Desktop2() {
               align='center'
               gutterBottom
             >
-              Target Institution
+              {' '}
+              1. Provide a verifiable credential of your transcript credits.{' '}
             </Typography>
-            <FormControl variant='outlined' className={classes.formControl}>
-              <InputLabel id='target-inst-label'>Institution Name</InputLabel>
-              <Select
-                labelId='target-inst-label'
-                id='targetInst'
-                value={destInst}
-                onChange={(event) => setDestInst(event.target.value)}
-                label='Institution Name'
-              >
-                {destInstitutions.map((inst) => (
-                  <MenuItem value={inst.value}>{inst.label}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl variant='outlined' className={classes.formControl}>
-              <InputLabel id='target-program-label'>Program Name</InputLabel>
-              <Select
-                labelId='target-program-label'
-                id='targetProgram'
-                value={destProgram}
-                onChange={(event) => setDestProgram(event.target.value)}
-                label='Program Name'
-              >
-                {degrees.map((inst) => (
-                  <MenuItem value={inst.value}>{inst.label}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <Button
-              variant='contained'
+            <Typography
+              variant='h2'
               color='primary'
-              className={classes.button}
-              disabled={!(destInst && destProgram && verified)}
-              onClick={() =>
-                setAnalysis({
-                  credentialSubjData,
-                  loading: true,
-                  step: 1,
-                  degreePlan: null,
-                })
-              }
+              align='center'
+              className={classes.h2}
             >
-              Let's Map It!
-            </Button>
+              2. Select your desired destination institution & program.{' '}
+            </Typography>
+            <Typography
+              variant='h2'
+              color='primary'
+              align='center'
+              className={classes.h2}
+            >
+              3. Let us analyze how your transfer credits can provide maximum
+              value towards your degree!{' '}
+            </Typography>
+            <Verification
+              handleVerificationStatus={setVerificationStatus}
+              verified={verified}
+            />
           </div>
-        )}
-        {analysis && analysis.loading && (
-          <div className={clsx(classes.loadingColumn, 'column')}>
-            <div className={classes.loading}>
-              <CircularProgress />
-              <Typography variant='h1' className={classes.loadingText}>
-                {analysis.step === 1
-                  ? 'Evaluating Transfer Credit'
-                  : 'Analyzing Degree Plan'}
+          {!(analysis && analysis.loading) && (
+            <div class='column'>
+              <Typography
+                variant='h1'
+                color='primary'
+                className={classes.h1}
+                align='center'
+                gutterBottom
+              >
+                Transfer Credit Evaluation
               </Typography>
+              <Typography
+                variant='h2'
+                color='primary'
+                align='center'
+                gutterBottom
+              >
+                Target Institution
+              </Typography>
+              <FormControl variant='outlined' className={classes.formControl}>
+                <InputLabel id='target-inst-label'>Institution Name</InputLabel>
+                <Select
+                  labelId='target-inst-label'
+                  id='targetInst'
+                  value={destInst}
+                  onChange={(event) => setDestInst(event.target.value)}
+                  label='Institution Name'
+                >
+                  {destInstitutions.map((inst) => (
+                    <MenuItem value={inst.value}>{inst.label}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl variant='outlined' className={classes.formControl}>
+                <InputLabel id='target-program-label'>Program Name</InputLabel>
+                <Select
+                  labelId='target-program-label'
+                  id='targetProgram'
+                  value={destProgram}
+                  onChange={(event) => setDestProgram(event.target.value)}
+                  label='Program Name'
+                >
+                  {degrees.map((inst) => (
+                    <MenuItem value={inst.value}>{inst.label}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <Button
+                variant='contained'
+                color='primary'
+                className={classes.button}
+                disabled={!(destInst && destProgram && verified)}
+                onClick={() =>
+                  setAnalysis({
+                    credentialSubjData,
+                    loading: true,
+                    step: 1,
+                    degreePlan: null,
+                  })
+                }
+              >
+                Let's Map It!
+              </Button>
             </div>
+          )}
+          {analysis && analysis.loading && (
+            <div className={clsx(classes.loadingColumn, 'column')}>
+              <div className={classes.loading}>
+                <CircularProgress />
+                <Typography variant='h1' className={classes.loadingText}>
+                  {analysis.step === 1
+                    ? 'Evaluating Transfer Credit'
+                    : 'Analyzing Degree Plan'}
+                </Typography>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+      {analysis && analysis.degreePlan && (
+        <div class='row'>
+          <div className={classes.column}>
+            <Typography variant='h4' className={classes.header}>
+              6 Semesters at Eastern Kentucky University
+            </Typography>
+            <Component planTermData={degreePlan} />
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
