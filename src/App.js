@@ -4,7 +4,7 @@ import Header from './layouts/Dashboard/Header/index.js';
 import Desktop1 from './views/Desktop1/index.js';
 import Footer from './layouts/Dashboard/Footer/index.js';
 import { createBrowserHistory } from 'history';
-import { Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import routes from './routes';
 import { renderRoutes } from 'react-router-config';
 import ScrollReset from './components/ScrollReset';

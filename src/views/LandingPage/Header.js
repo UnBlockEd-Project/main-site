@@ -5,11 +5,20 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Typography, Grid, Button, Hidden } from '@material-ui/core';
 import BarChartIcon from '@material-ui/icons/BarChart';
+import MapIcon from '@material-ui/icons/Map';
+import NoteAddIcon from '@material-ui/icons/NoteAdd';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+    display: 'flex',
+    flex: 1,
+    marginBottom: theme.spacing(15),
+  },
   summaryButton: {
     backgroundColor: theme.palette.common.white,
+    marginRight: theme.spacing(5),
+    marginTop: theme.spacing(3),
   },
   barChartIcon: {
     marginRight: theme.spacing(1),
@@ -26,32 +35,46 @@ function Header({ className, ...rest }) {
 
   return (
     <div {...rest} className={clsx(classes.root, className)}>
-      <Grid alignItems='center' container justify='space-between' spacing={3}>
-        <Grid item md={6} xs={12}>
-          <Typography component='h2' gutterBottom variant='overline'>
+      <Grid alignItems='center' container justify='space-evenly' spacing={3}>
+        <Grid item md={5} xs={12}>
+          {/* <Typography component='h2' gutterBottom variant='overline'>
             Home
-          </Typography>
+          </Typography> */}
           <Typography component='h1' gutterBottom variant='h3'>
-            Good Morning, {session.user.first_name}
+            You Deserve Some Credit!
           </Typography>
           <Typography gutterBottom variant='subtitle1'>
-            Here’s what’s happening with your projects today
+            UnBlockEd's Curricular Analytics platform is here to help you plan
+            your degree and articulate transfer credit to get as much value from
+            your courses as possible!
           </Typography>
           <Button
             className={classes.summaryButton}
             edge='start'
             variant='contained'
+            component={RouterLink}
+            to='/map'
           >
-            <BarChartIcon className={classes.barChartIcon} />
-            View summary
+            <MapIcon className={classes.barChartIcon} />
+            Map a Degree Plan
+          </Button>
+          <Button
+            className={classes.summaryButton}
+            edge='start'
+            variant='contained'
+            component={RouterLink}
+            to='/transfer'
+          >
+            <NoteAddIcon className={classes.barChartIcon} />
+            Use Your VC Transcript
           </Button>
         </Grid>
         <Hidden smDown>
-          <Grid item md={6}>
+          <Grid item md={5}>
             <img
               alt='Cover'
               className={classes.image}
-              src='/images/undraw_growth_analytics_8btt.svg'
+              src='/images/intro.jpeg'
             />
           </Grid>
         </Hidden>

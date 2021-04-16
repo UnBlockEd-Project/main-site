@@ -36,6 +36,7 @@ import {
   Hidden,
   Input,
   colors,
+  Link,
   Popper,
   Paper,
   List,
@@ -69,6 +70,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-evenly',
+    '& > *': {
+      color: 'white',
+    },
   },
   search: {
     backgroundColor: 'rgba(255,255,255, 0.1)',
@@ -233,11 +237,36 @@ function TopBar({ onOpenNavBarMobile, className, ...rest }) {
         <div className={classes.flexGrow} />
         <Hidden smDown>
           <div className={classes.navItems}>
-            <h2>Getting Started</h2>
-            <h2>Explore Degree Plans</h2>
-            <h2>Transfer Options</h2>
-            <h2>Tools</h2>
-            <h2>Login</h2>
+            <Link
+              component={RouterLink}
+              to='/home'
+              variant='h2'
+              underline='none'
+            >
+              Getting Started
+            </Link>
+            <Link
+              component={RouterLink}
+              to='/map'
+              variant='h2'
+              underline='none'
+            >
+              Explore Degree Plans
+            </Link>
+            <Link
+              component={RouterLink}
+              to='/transfer'
+              variant='h2'
+              underline='none'
+            >
+              Transfer Options
+            </Link>
+            <Link component={RouterLink} to='/' variant='h2' underline='none'>
+              Tools
+            </Link>
+            <Link component={RouterLink} to='/' variant='h2' underline='none'>
+              Login
+            </Link>
           </div>
         </Hidden>
         {/* <Hidden smDown>
