@@ -18,7 +18,7 @@ export default [
       {
         path: '/home',
         exact: true,
-        component: lazy(() => import('./views/Desktop1')),
+        component: lazy(() => import('./views/Desktop0')),
       },
       {
         path: '/map',

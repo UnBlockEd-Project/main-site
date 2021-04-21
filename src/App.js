@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Header from './layouts/Dashboard/Header/index.js';
+import Desktop0 from './views/Desktop0/index.js';
 import Desktop1 from './views/Desktop1/index.js';
 import Footer from './layouts/Dashboard/Footer/index.js';
 import { createBrowserHistory } from 'history';
@@ -23,12 +24,6 @@ function App() {
         <Router history={history}>
           <ScrollReset />
           {renderRoutes(routes)}
-
-          {/* <div>
-        <Header />
-        <Desktop1 />
-        <Footer />
-      </div> */}
         </Router>
       </ThemeProvider>
     </StoreProvider>
