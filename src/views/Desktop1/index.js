@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Desktop1.css';
 // import Select from 'react-select';
 import Verification from '../../components/Verification';
-// import Demo from '../demo/Demo.vue';
+// import Demo from '../../components/demo/Demo.vue';
 import { VueInReact } from 'vuera';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     flexBasis: '100%',
     flex: 1,
     '& > *': {
-      minWidth: 1118,
+      minWidth: 1188,
     },
   },
   header: {
@@ -302,13 +302,17 @@ function Desktop1() {
             </div>
           </div>
         )}
-        {/* {analysis && analysis.degreePlan && (
+        {/* {analysis && analysis.degreePlan && analysis.degreePlan[0] && (
           <div class='row'>
             <div className={classes.column}>
               <Typography variant='h4' className={classes.header}>
                 6 Semesters at Eastern Kentucky University
               </Typography>
-              <Component planTermData={degreePlan} />
+              <Component planTermData={analysis.degreePlan[0]} />
+              <Typography variant='h4' className={classes.header}>
+                6 Semesters at Eastern Kentucky University
+              </Typography>
+              <Component planTermData={analysis.degreePlan[1]} />
             </div>
           </div>
         )} */}
