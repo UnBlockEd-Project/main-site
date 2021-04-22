@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
+import { Button, Typography, CircularProgress } from '@material-ui/core';
 import AceEditor from 'react-ace';
 import 'brace/mode/json';
 import 'brace/theme/xcode';
@@ -35,6 +35,7 @@ export default function MultilineTextFields({
   const classes = useStyles();
   const [jsonValue, setJsonValue] = useState(null);
   const [valid, setValid] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     //Disables the Verify button unless the JSON is valid
@@ -48,8 +49,8 @@ export default function MultilineTextFields({
 
   const handleVerify = async (event) => {
     event.preventDefault();
-
     //The following use of the verifyCredential API is boilerplate from the W3C universal wallet interop spec
+    await setLoading(true);
     const suite = new Ed25519Signature2018();
     const options = { suite, documentLoader };
     let verification = { verified: false };
@@ -60,12 +61,14 @@ export default function MultilineTextFields({
       });
     } catch (error) {
       //Verification failed for syntax reasons; perhaps because invalid JSON-LD
+      await setLoading(false);
       handleVerificationStatus({ verified: false, status: error.message });
       window.alert(`Failed: ${error.message}`);
     }
     if (!verification.verified) {
       //Verification failed for signature validity reasons; perhaps because the transcript was tampered with
       const { error } = verification;
+      await setLoading(false);
       if (error && error.errors && error.errors[0]) {
         handleVerificationStatus({
           verified: false,
@@ -74,6 +77,7 @@ export default function MultilineTextFields({
         window.alert(`Failed: ${error.errors[0].message || error.errors[0]}`);
       }
     } else {
+      await setLoading(false);
       handleVerificationStatus({
         verified: true,
         status: 'Verified!',
@@ -114,16 +118,20 @@ export default function MultilineTextFields({
           tabSize: 1,
         }}
       />
-      <Button
-        variant='contained'
-        color='primary'
-        disabled={!valid}
-        onClick={handleVerify}
-        className={classes.verify}
-        disabled={verified}
-      >
-        {verified ? 'Successfully Verified!' : 'Verify'}
-      </Button>
+      {loading ? (
+        <CircularProgress className={classes.verify} />
+      ) : (
+        <Button
+          variant='contained'
+          color='primary'
+          disabled={!valid}
+          onClick={handleVerify}
+          className={classes.verify}
+          disabled={verified}
+        >
+          {verified ? 'Successfully Verified!' : 'Verify'}
+        </Button>
+      )}
     </form>
   );
 }

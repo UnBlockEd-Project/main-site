@@ -74,16 +74,66 @@ const sourceInstitutions = [
   {
     value: 'elizabethtown',
     label: 'Elizabethtown Community & Technical College',
+    degrees: [
+      { value: 'as', label: 'Associate in Science' },
+      { value: 'aa', label: 'Associate in Arts' },
+    ],
   },
-  { value: 'ashland', label: 'Ashland Community & Technical College' },
-  { value: 'bluegrass', label: 'Bluegrass Community & Technical College' },
+  {
+    value: 'ashland',
+    label: 'Ashland Community & Technical College',
+    degrees: [
+      { value: 'as', label: 'Associate in Science' },
+      { value: 'aa', label: 'Associate in Arts' },
+    ],
+  },
+  {
+    value: 'bluegrass',
+    label: 'Bluegrass Community & Technical College',
+    degrees: [
+      { value: 'as', label: 'Associate in Science' },
+      { value: 'aa', label: 'Associate in Arts' },
+    ],
+  },
 ];
 
 const destInstitutions = [
-  { value: 'eku', label: 'Eastern Kentucky University' },
-  { value: 'murray', label: 'Murray State University' },
-  { value: 'nku', label: 'Northern Kentucky University' },
-  { value: 'uk', label: 'University of Kentucky' },
+  {
+    value: 'eku',
+    label: 'Eastern Kentucky University',
+    degrees: [
+      { value: 'physics', label: 'Physics' },
+      { value: 'bw', label: 'Basket Weaving' },
+    ],
+  },
+  {
+    value: 'murray',
+    label: 'Murray State University',
+    degrees: [
+      { value: 'physics', label: 'Physics' },
+      { value: 'english', label: 'English' },
+      { value: 'cs', label: 'Computer Science' },
+      { value: 'bw', label: 'Basket Weaving' },
+    ],
+  },
+  {
+    value: 'nku',
+    label: 'Northern Kentucky University',
+    degrees: [
+      { value: 'cs', label: 'Computer Science' },
+      { value: 'bw', label: 'Basket Weaving' },
+    ],
+  },
+  {
+    value: 'uk',
+    label: 'University of Kentucky',
+    degrees: [
+      { value: 'bio', label: 'Biology' },
+      { value: 'spanish', label: 'Spanish' },
+      { value: 'cs', label: 'Computer Science' },
+      { value: 'bw', label: 'Basket Weaving' },
+    ],
+  },
 ];
 
 {
@@ -168,8 +218,14 @@ function Desktop1() {
             <Select
               labelId='source-inst-label'
               id='sourceInst'
-              value={sourceInst}
-              onChange={(event) => setSourceInst(event.target.value)}
+              value={sourceInst && sourceInst.value}
+              onChange={(event) =>
+                setSourceInst(
+                  sourceInstitutions.find(
+                    (inst) => inst.value === event.target.value
+                  )
+                )
+              }
               label='Institution Name'
             >
               {sourceInstitutions.map((inst) => (
@@ -177,7 +233,11 @@ function Desktop1() {
               ))}
             </Select>
           </FormControl>
-          <FormControl variant='outlined' className={classes.formControl}>
+          <FormControl
+            variant='outlined'
+            className={classes.formControl}
+            disabled={!sourceInst.degrees}
+          >
             <InputLabel id='source-program-label'>Program Name</InputLabel>
             <Select
               labelId='source-program-label'
@@ -186,7 +246,7 @@ function Desktop1() {
               onChange={(event) => setSourceProgram(event.target.value)}
               label='Program Name'
             >
-              {degrees.map((inst) => (
+              {(sourceInst.degrees || degrees).map((inst) => (
                 <MenuItem value={inst.value}>{inst.label}</MenuItem>
               ))}
             </Select>
@@ -205,8 +265,14 @@ function Desktop1() {
             <Select
               labelId='target-inst-label'
               id='targetInst'
-              value={destInst}
-              onChange={(event) => setDestInst(event.target.value)}
+              value={destInst && destInst.value}
+              onChange={(event) =>
+                setDestInst(
+                  destInstitutions.find(
+                    (inst) => inst.value === event.target.value
+                  )
+                )
+              }
               label='Institution Name'
             >
               {destInstitutions.map((inst) => (
@@ -214,7 +280,11 @@ function Desktop1() {
               ))}
             </Select>
           </FormControl>
-          <FormControl variant='outlined' className={classes.formControl}>
+          <FormControl
+            variant='outlined'
+            className={classes.formControl}
+            disabled={!destInst.degrees}
+          >
             <InputLabel id='target-program-label'>Program Name</InputLabel>
             <Select
               labelId='target-program-label'
@@ -223,7 +293,7 @@ function Desktop1() {
               onChange={(event) => setDestProgram(event.target.value)}
               label='Program Name'
             >
-              {degrees.map((inst) => (
+              {(destInst.degrees || degrees).map((inst) => (
                 <MenuItem value={inst.value}>{inst.label}</MenuItem>
               ))}
             </Select>

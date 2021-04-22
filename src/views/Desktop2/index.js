@@ -63,14 +63,41 @@ const useStyles = makeStyles((theme) => ({
 
 const destInstitutions = [
   {
-    value: 'EASTERN KENTUCKY UNIVERSITY',
+    value: 'eku',
     label: 'Eastern Kentucky University',
+    degrees: [
+      { value: 'physics', label: 'Physics' },
+      { value: 'bw', label: 'Basket Weaving' },
+    ],
   },
   {
-    value: 'NORTHERN KENTUCKY UNIVERSITY',
-    label: 'Northern Kentucky University',
+    value: 'murray',
+    label: 'Murray State University',
+    degrees: [
+      { value: 'physics', label: 'Physics' },
+      { value: 'english', label: 'English' },
+      { value: 'cs', label: 'Computer Science' },
+      { value: 'bw', label: 'Basket Weaving' },
+    ],
   },
-  { value: 'MURRAY STATE UNIVERSITY', label: 'Murray State University' },
+  {
+    value: 'nku',
+    label: 'Northern Kentucky University',
+    degrees: [
+      { value: 'cs', label: 'Computer Science' },
+      { value: 'bw', label: 'Basket Weaving' },
+    ],
+  },
+  {
+    value: 'uk',
+    label: 'University of Kentucky',
+    degrees: [
+      { value: 'bio', label: 'Biology' },
+      { value: 'spanish', label: 'Spanish' },
+      { value: 'cs', label: 'Computer Science' },
+      { value: 'bw', label: 'Basket Weaving' },
+    ],
+  },
 ];
 
 const degrees = [
@@ -355,6 +382,7 @@ function Desktop2() {
               color='primary'
               align='center'
               gutterBottom
+              style={{ marginBottom: 20 }}
             >
               Target Institution
             </Typography>
@@ -363,8 +391,14 @@ function Desktop2() {
               <Select
                 labelId='target-inst-label'
                 id='targetInst'
-                value={destInst}
-                onChange={(event) => setDestInst(event.target.value)}
+                value={destInst && destInst.value}
+                onChange={(event) =>
+                  setDestInst(
+                    destInstitutions.find(
+                      (inst) => inst.value === event.target.value
+                    )
+                  )
+                }
                 label='Institution Name'
               >
                 {destInstitutions.map((inst) => (
@@ -372,7 +406,11 @@ function Desktop2() {
                 ))}
               </Select>
             </FormControl>
-            <FormControl variant='outlined' className={classes.formControl}>
+            <FormControl
+              variant='outlined'
+              className={classes.formControl}
+              disabled={!destInst.degrees}
+            >
               <InputLabel id='target-program-label'>Program Name</InputLabel>
               <Select
                 labelId='target-program-label'
@@ -381,7 +419,7 @@ function Desktop2() {
                 onChange={(event) => setDestProgram(event.target.value)}
                 label='Program Name'
               >
-                {degrees.map((inst) => (
+                {(destInst.degrees || degrees).map((inst) => (
                   <MenuItem value={inst.value}>{inst.label}</MenuItem>
                 ))}
               </Select>
@@ -416,6 +454,16 @@ function Desktop2() {
             </div>
           </div>
         )}
+        {/* {analysis && analysis.degreePlan && (
+          <div class='row'>
+            <div className={classes.column}>
+              <Typography variant='h4' className={classes.header}>
+                {analysis.degreePlan.length || '6'} Semesters at {destInst.label || 'Eastern Kentucky University'}
+              </Typography>
+              <Component planTermData={degreePlan} />
+            </div>
+          </div>
+        )} */}
       </div>
     </div>
   );
