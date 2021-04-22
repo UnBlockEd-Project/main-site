@@ -8,11 +8,11 @@ import Desktop1 from './views/Desktop1';
 import Desktop2 from './views/Desktop2';
 
 export default [
-  //   {
-  //     path: '/',
-  //     exact: true,
-  //     component: () => <Redirect to='/home' />,
-  //   },
+  {
+    path: '/',
+    exact: true,
+    component: () => <Redirect to='/home' />,
+  },
   {
     route: '*',
     component: DashboardLayout,

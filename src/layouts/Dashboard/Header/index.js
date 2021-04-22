@@ -130,6 +130,9 @@ const useStyles = makeStyles((theme) => ({
   logoutIcon: {
     marginRight: theme.spacing(1),
   },
+  links: {
+    cursor: 'pointer',
+  },
 }));
 
 const popularSearches = [
@@ -242,6 +245,7 @@ function TopBar({ onOpenNavBarMobile, className, ...rest }) {
               to='/home'
               variant='h2'
               underline='none'
+              className={classes.links}
             >
               Getting Started
             </Link>
@@ -250,6 +254,7 @@ function TopBar({ onOpenNavBarMobile, className, ...rest }) {
               to='/map'
               variant='h2'
               underline='none'
+              className={classes.links}
             >
               Explore Degree Plans
             </Link>
@@ -258,13 +263,26 @@ function TopBar({ onOpenNavBarMobile, className, ...rest }) {
               to='/transfer'
               variant='h2'
               underline='none'
+              className={classes.links}
             >
               Transfer Options
             </Link>
-            <Link component={RouterLink} to='/' variant='h2' underline='none'>
+            <Link
+              component={RouterLink}
+              to='/'
+              variant='h2'
+              underline='none'
+              className={classes.links}
+            >
               Tools
             </Link>
-            <Link component={RouterLink} to='/' variant='h2' underline='none'>
+            <Link
+              component={RouterLink}
+              to='/'
+              variant='h2'
+              underline='none'
+              className={classes.links}
+            >
               Login
             </Link>
           </div>

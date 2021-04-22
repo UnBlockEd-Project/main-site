@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Desktop1.css';
 // import Select from 'react-select';
 import Verification from '../../components/Verification';
@@ -10,8 +10,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import { withRouter } from 'react-router';
+import kctcsAs from '../../payloads/kctcs_as';
+import ekuPhys from '../../payloads/eku_phys';
+import nkuCs from '../../payloads/nku_cs';
+import clsx from 'clsx';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -23,6 +28,41 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     marginTop: 15,
+  },
+  h1: {
+    margin: 30,
+  },
+  h2: {
+    marginTop: 20,
+    marginBottom: 20,
+    maxWidth: 700,
+  },
+  column: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    flexBasis: '100%',
+    flex: 1,
+    '& > *': {
+      minWidth: 1118,
+    },
+  },
+  header: {
+    marginTop: 50,
+    textAlign: 'center',
+    color: '#3b4391',
+  },
+  loadingColumn: {
+    justifyContent: 'center',
+  },
+  loadingText: {
+    marginTop: 10,
+  },
+  loading: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
   },
 }));
 
@@ -40,9 +80,10 @@ const sourceInstitutions = [
 ];
 
 const destInstitutions = [
-  { value: 'uk', label: 'University of Kentucky' },
-  { value: 'wku', label: 'Western Kentucky University' },
+  { value: 'eku', label: 'Eastern Kentucky University' },
   { value: 'murray', label: 'Murray State University' },
+  { value: 'nku', label: 'Northern Kentucky University' },
+  { value: 'uk', label: 'University of Kentucky' },
 ];
 
 {
@@ -62,13 +103,66 @@ function Desktop1() {
   const [sourceProgram, setSourceProgram] = useState('');
   const [destInst, setDestInst] = useState('');
   const [destProgram, setDestProgram] = useState('');
+  const [analysis, setAnalysis] = useState(null);
+  const [sourceDegreePlan, setSourceDegreePlan] = useState(kctcsAs);
+  const [destDegreePlan, setDestDegreePlan] = useState(null);
+
+  useEffect(() => {
+    if (analysis && analysis.loading && analysis.step === 1) {
+      setTimeout(() => {
+        setAnalysis((prevAnalysis) => ({ ...prevAnalysis, step: 2 }));
+      }, 3000);
+    }
+    if (analysis && analysis.loading && analysis.step === 2) {
+      setTimeout(() => {
+        setAnalysis((prevAnalysis) => ({
+          ...prevAnalysis,
+          loading: false,
+          step: 3,
+          degreePlan: [sourceDegreePlan, destDegreePlan],
+        }));
+      }, 3000);
+    }
+  }, [analysis]);
+
+  const handleSubmit = () => {
+    switch (destInst) {
+      case 'eku':
+        setDestDegreePlan(ekuPhys);
+        break;
+      case 'nku':
+        setDestDegreePlan(nkuCs);
+        break;
+    }
+    setAnalysis({
+      credentialSubjData: {
+        sourceInst,
+        sourceProgram,
+        destInst,
+        destProgram,
+      },
+      loading: true,
+      step: 1,
+      degreePlan: null,
+    });
+  };
 
   return (
     <div class='Desktop1'>
       <div class='row'>
         <div class='column'>
-          <h1> Map Degree Requirements</h1>
-          <h2>Starting Institution</h2>
+          <Typography
+            variant='h1'
+            color='primary'
+            className={classes.h1}
+            align='center'
+          >
+            {' '}
+            Map Degree Requirements
+          </Typography>
+          <Typography variant='h2' color='primary' align='center' gutterBottom>
+            Starting Institution
+          </Typography>
           <FormControl variant='outlined' className={classes.formControl}>
             <InputLabel id='source-inst-label'>Institution Name</InputLabel>
             <Select
@@ -97,7 +191,15 @@ function Desktop1() {
               ))}
             </Select>
           </FormControl>
-          <h2>Target Institution</h2>
+          <Typography
+            variant='h2'
+            color='primary'
+            align='center'
+            gutterBottom
+            className={classes.h2}
+          >
+            Target Institution{' '}
+          </Typography>{' '}
           <FormControl variant='outlined' className={classes.formControl}>
             <InputLabel id='target-inst-label'>Institution Name</InputLabel>
             <Select
@@ -131,6 +233,7 @@ function Desktop1() {
             color='primary'
             className={classes.button}
             disabled={!(sourceInst && sourceProgram && destInst && destProgram)}
+            onClick={handleSubmit}
           >
             Let's Map It!
           </Button>
@@ -144,15 +247,71 @@ function Desktop1() {
                     </div>
 
                 */}
-        <div class='column'>
-          <h1> How To Use This Feature?</h1>
-          <h2> Select your current institution and the institution you </h2>
-          <h2>are interested in transferring to. Then click “Let’s Map It!”</h2>
-          <h2> to learn how your credits will transfer.</h2>
-        </div>
-        {/* <div class='column'>
-          <Component />
-        </div> */}
+        {!(analysis && analysis.loading) && (
+          <div class='column'>
+            <Typography
+              variant='h1'
+              color='primary'
+              className={classes.h1}
+              align='center'
+            >
+              {' '}
+              How To Use This Feature?
+            </Typography>
+            <Typography
+              variant='h2'
+              className={classes.h2}
+              color='primary'
+              align='center'
+              gutterBottom
+            >
+              {' '}
+              Select your current institution and degree program.
+            </Typography>
+            <Typography
+              variant='h2'
+              className={classes.h2}
+              color='primary'
+              align='center'
+              gutterBottom
+            >
+              Then select the school & program you're interested in transferring
+              to!
+            </Typography>
+            <Typography
+              variant='h2'
+              className={classes.h2}
+              color='primary'
+              align='center'
+              gutterBottom
+            >
+              {' '}
+              Click "Let's Map It!" to learn how your credits will transfer.
+            </Typography>
+          </div>
+        )}
+        {analysis && analysis.loading && (
+          <div className={clsx(classes.loadingColumn, 'column')}>
+            <div className={classes.loading}>
+              <CircularProgress />
+              <Typography variant='h1' className={classes.loadingText}>
+                {analysis.step === 1
+                  ? 'Evaluating Transfer Credit'
+                  : 'Analyzing Degree Plan'}
+              </Typography>
+            </div>
+          </div>
+        )}
+        {/* {analysis && analysis.degreePlan && (
+          <div class='row'>
+            <div className={classes.column}>
+              <Typography variant='h4' className={classes.header}>
+                6 Semesters at Eastern Kentucky University
+              </Typography>
+              <Component planTermData={degreePlan} />
+            </div>
+          </div>
+        )} */}
       </div>
     </div>
   );

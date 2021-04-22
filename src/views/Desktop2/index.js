@@ -44,18 +44,39 @@ const useStyles = makeStyles((theme) => ({
   loadingColumn: {
     justifyContent: 'center',
   },
+  column: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    flexBasis: '100%',
+    flex: 1,
+    '& > *': {
+      minWidth: 1118,
+    },
+  },
+  header: {
+    marginTop: 50,
+    textAlign: 'center',
+    color: '#3b4391',
+  },
 }));
 
 const destInstitutions = [
-  { value: 'uk', label: 'Eastern Kentucky University' },
-  { value: 'wku', label: 'Western Kentucky University' },
-  { value: 'murray', label: 'Murray State University' },
+  {
+    value: 'EASTERN KENTUCKY UNIVERSITY',
+    label: 'Eastern Kentucky University',
+  },
+  {
+    value: 'NORTHERN KENTUCKY UNIVERSITY',
+    label: 'Northern Kentucky University',
+  },
+  { value: 'MURRAY STATE UNIVERSITY', label: 'Murray State University' },
 ];
 
 const degrees = [
-  { value: 'cs', label: 'Computer Science' },
-  { value: 'english', label: 'English' },
-  { value: 'physics', label: 'Physics' },
+  { value: 'Computer Science', label: 'Computer Science' },
+  { value: 'English', label: 'English' },
+  { value: 'Physics', label: 'Physics' },
 ];
 
 // let json = require("./institutions.json");
@@ -117,7 +138,8 @@ function Desktop2() {
       const { academicRecord } = credentialSubject;
       const multiQuery = {};
       academicRecord.forEach((subRec) => {
-        const { year } = subRec.semester;
+        // const { year } = subRec.semester;
+        const year = 2016;
         const { college } = subRec.academicProgram;
         const { coursesTransferred, coursesTaken } = subRec;
         (coursesTransferred || []).forEach((transObj) => {
@@ -157,7 +179,10 @@ function Desktop2() {
               [
                 '?newCourse',
                 'LearningOpportunityProfile/ownedBy',
-                ['CredentialOrganization/name', 'EASTERN KENTUCKY UNIVERSITY'],
+                [
+                  'CredentialOrganization/name',
+                  destInst || 'EASTERN KENTUCKY UNIVERSITY',
+                ],
               ],
               [
                 '?newCourse',
@@ -208,7 +233,10 @@ function Desktop2() {
               [
                 '?newCourse',
                 'LearningOpportunityProfile/ownedBy',
-                ['CredentialOrganization/name', 'EASTERN KENTUCKY UNIVERSITY'],
+                [
+                  'CredentialOrganization/name',
+                  destInst || 'EASTERN KENTUCKY UNIVERSITY',
+                ],
               ],
               [
                 '?newCourse',
