@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Desktop1.css';
 // import Select from 'react-select';
 import Verification from '../../components/Verification';
-// import Demo from '../../components/demo/Demo.vue';
+import Demo from '../../components/demo/Demo.vue';
 import { VueInReact } from 'vuera';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -13,8 +13,8 @@ import Select from '@material-ui/core/Select';
 import { Button, Typography } from '@material-ui/core';
 import { withRouter } from 'react-router';
 import kctcsAs from '../../payloads/kctcs_as';
-import ekuPhys from '../../payloads/eku_phys';
-import nkuCs from '../../payloads/nku_cs';
+import ekuPhys from '../../payloads/01_eku_phys.js';
+import nkuCs from '../../payloads/01_nku_cs.js';
 import clsx from 'clsx';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -147,7 +147,7 @@ const degrees = [
 ];
 
 function Desktop1() {
-  //   const Component = VueInReact(Demo);
+  const Component = VueInReact(Demo);
   const classes = useStyles();
   const [sourceInst, setSourceInst] = useState('');
   const [sourceProgram, setSourceProgram] = useState('');
@@ -176,7 +176,7 @@ function Desktop1() {
   }, [analysis]);
 
   const handleSubmit = () => {
-    switch (destInst) {
+    switch (destInst.value) {
       case 'eku':
         setDestDegreePlan(ekuPhys);
         break;
@@ -372,20 +372,25 @@ function Desktop1() {
             </div>
           </div>
         )}
-        {/* {analysis && analysis.degreePlan && analysis.degreePlan[0] && (
-          <div class='row'>
-            <div className={classes.column}>
-              <Typography variant='h4' className={classes.header}>
-                6 Semesters at Eastern Kentucky University
-              </Typography>
-              <Component planTermData={analysis.degreePlan[0]} />
-              <Typography variant='h4' className={classes.header}>
-                6 Semesters at Eastern Kentucky University
-              </Typography>
-              <Component planTermData={analysis.degreePlan[1]} />
+        {analysis &&
+          analysis.degreePlan &&
+          analysis.degreePlan[0] &&
+          analysis.degreePlan[1] && (
+            <div class='row'>
+              <div className={classes.column}>
+                <Typography variant='h4' className={classes.header}>
+                  {analysis.degreePlan[0].length || '6'} Semesters at{' '}
+                  {sourceInst.label || 'Eastern Kentucky University'}
+                </Typography>
+                <Component planTermData={analysis.degreePlan[0]} />
+                <Typography variant='h4' className={classes.header}>
+                  {analysis.degreePlan[1].length || '6'} Semesters at{' '}
+                  {destInst.label || 'Eastern Kentucky University'}{' '}
+                </Typography>
+                <Component planTermData={analysis.degreePlan[1]} />
+              </div>
             </div>
-          </div>
-        )} */}
+          )}
       </div>
     </div>
   );

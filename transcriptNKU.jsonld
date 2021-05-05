@@ -57,7 +57,7 @@
   "credentialSubject": {
     "id": "did:key:z6MkjjCpsoQrwnEmqHzLdxWowXk5gjbwor4urC1RPDmGeV8r",
     "student": {
-      "givenName": "Joe",
+      "givenName": "Jimmy",
       "familyName": "Doe",
       "additionalName": "",
       "birthDate": "1996-03-10T04:24:12.164Z",
@@ -98,8 +98,8 @@
         "coursesTaken": [
           {
             "course": {
-              "code": "FYE 105",
-              "name": "Achieving Academic Success",
+              "code": "THA 101",
+              "name": "Introduction to Theatre: Principles and Practice",
               "credit": 3,
               "points": 12
             },
@@ -108,10 +108,10 @@
           },
           {
             "course": {
-              "code": "MAT 174",
+              "code": "MAT 175",
               "name": "Calculus I",
-              "credit": 4,
-              "points": 16
+              "credit": 5,
+              "points": 20
             },
             "grade": "A",
             "notes": ""
@@ -128,20 +128,20 @@
           },
           {
             "course": {
-              "code": "PHY 231",
-              "name": "General University Physics I",
-              "credit": 4,
-              "points": 16
+              "code": "CHE 120",
+              "name": "Chemistry in Society",
+              "credit": 3,
+              "points": 12
             },
             "grade": "A",
             "notes": ""
           },
           {
             "course": {
-              "code": "PHY 241",
-              "name": "General University Physics I Laboratory",
+              "code": "CHE 125",
+              "name": "Chemistry in Society Laboratory",
               "credit": 1,
-              "points": 3
+              "points": 4
             },
             "grade": "A",
             "notes": ""
@@ -180,8 +180,18 @@
           },
           {
             "course": {
-              "code": "CHE 120",
-              "name": "Chemistry in Society",
+              "code": "MAT 185",
+              "name": "Calculus II",
+              "credit": 5,
+              "points": 20
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "CIT 105",
+              "name": "Introduction to Computers",
               "credit": 3,
               "points": 12
             },
@@ -190,18 +200,8 @@
           },
           {
             "course": {
-              "code": "MAT 184",
-              "name": "Calculus II",
-              "credit": 4,
-              "points": 16
-            },
-            "grade": "A",
-            "notes": ""
-          },
-          {
-            "course": {
-              "code": "HIS 108",
-              "name": "History of the United States Through 1865",
+              "code": "CIT 120",
+              "name": "Computational Thinking",
               "credit": 3,
               "points": 12
             },
@@ -242,20 +242,20 @@
           },
           {
             "course": {
-              "code": "PHY 232",
-              "name": "General University Physics II",
-              "credit": 4,
-              "points": 16
+              "code": "HIS 108",
+              "name": "History of the United States Through 1865",
+              "credit": 3,
+              "points": 12
             },
             "grade": "A",
             "notes": ""
           },
           {
             "course": {
-              "code": "PHY 242",
-              "name": "General University Physics II Laboratory",
-              "credit": 1,
-              "points": 4
+              "code": "CIT 149",
+              "name": "Java I",
+              "credit": 3,
+              "points": 12
             },
             "grade": "A",
             "notes": ""
@@ -264,6 +264,16 @@
             "course": {
               "code": "POL 101",
               "name": "American Government",
+              "credit": 3,
+              "points": 12
+            },
+            "grade": "A",
+            "notes": ""
+          },
+          {
+            "course": {
+              "code": "CIT 155",
+              "name": "Web Page Development",
               "credit": 3,
               "points": 12
             },
@@ -284,8 +294,8 @@
         "coursesTaken": [
           {
             "course": {
-              "code": "REL 130",
-              "name": "Introduction to Comparative Religion",
+              "code": "CIT 249",
+              "name": "Java II",
               "credit": 3,
               "points": 12
             },
@@ -314,8 +324,8 @@
           },
           {
             "course": {
-              "code": "MAT 285",
-              "name": "Differential Equations",
+              "code": "CIT 238",
+              "name": "Android Programming I",
               "credit": 3,
               "points": 12
             },
@@ -331,16 +341,6 @@
             },
             "grade": "A",
             "notes": ""
-          },
-          {
-            "course": {
-              "code": "THA 101",
-              "name": "Introduction to Theatre: Principles and Practice",
-              "credit": 3,
-              "points": 12
-            },
-            "grade": "A",
-            "notes": ""
           }
         ]
       }
@@ -350,8 +350,8 @@
   "issuer": "did:key:z6Mkf7FWHfJANm9n4hPMt3dmtAcqnkNuyJLHSovSMnfq4Wws",
   "proof": {
     "type": "Ed25519Signature2018",
-    "created": "2021-05-04T12:21:43.185Z",
-    "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..ZE5XNDQKxLEhNMVbvny9tSt25iEyF17xqbyXOV3lYy9GB1EMvx6LQLU89jBiHjAbRFzH54mcv5PIY9fRBI7sCw",
+    "created": "2021-05-04T18:15:49.212Z",
+    "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..xL1YKlosfx93zP2XbdfE1MGbQJveyx7hoAZjSBJA5sVwRwx6CPX2aK7Q3eHDPcoYrVrYEcnW9eB_yHBuU-8GCQ",
     "proofPurpose": "assertionMethod",
     "verificationMethod": "did:key:z6Mkf7FWHfJANm9n4hPMt3dmtAcqnkNuyJLHSovSMnfq4Wws#z6Mkf7FWHfJANm9n4hPMt3dmtAcqnkNuyJLHSovSMnfq4Wws"
   }

@@ -12,7 +12,10 @@ import { Button } from '@material-ui/core';
 import Verification from '../../components/Verification';
 import axios from '../../utils/axios';
 import clsx from 'clsx';
-import degreePlan from './new_plan';
+import nkuCs from '../../payloads/02_vc_nku_cs.js';
+import ekuPhys from '../../payloads/02_vc_eku_phys';
+import Demo from '../../components/demo/Demo.vue';
+import { VueInReact } from 'vuera';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -131,6 +134,7 @@ const degrees = [
 
 function Desktop2() {
   const classes = useStyles();
+  const Component = VueInReact(Demo);
   const [sourceInst, setSourceInst] = useState('');
   const [sourceProgram, setSourceProgram] = useState('');
   const [destInst, setDestInst] = useState('');
@@ -147,6 +151,9 @@ function Desktop2() {
       }, 3000);
     }
     if (analysis && analysis.loading && analysis.step === 2) {
+      const degreePlan =
+        destInst.value === 'nku' ? nkuCs : ekuPhys && ekuPhys.slice(2);
+      debugger;
       setTimeout(() => {
         setAnalysis((prevAnalysis) => ({
           ...prevAnalysis,
@@ -160,13 +167,15 @@ function Desktop2() {
 
   useEffect(async () => {
     if (verificationStatus && verificationStatus.verified) {
+      const instName =
+        destInst && destInst.label && destInst.label.toUpperCase();
       const { credential } = verificationStatus;
       const { credentialSubject } = credential;
       const { academicRecord } = credentialSubject;
       const multiQuery = {};
       academicRecord.forEach((subRec) => {
-        // const { year } = subRec.semester;
-        const year = 2016;
+        const { year } = subRec.semester;
+        // const year = 2016;
         const { college } = subRec.academicProgram;
         const { coursesTransferred, coursesTaken } = subRec;
         (coursesTransferred || []).forEach((transObj) => {
@@ -188,11 +197,11 @@ function Desktop2() {
                 'LearningOpportunityProfile/ownedBy',
                 ['CredentialOrganization/name', institution.name],
               ],
-              [
-                '?course',
-                'LearningOpportunityProfile/effectiveDate',
-                Number(year),
-              ],
+              // [
+              //   '?course',
+              //   'LearningOpportunityProfile/effectiveDate',
+              //   Number(year),
+              // ],
               [
                 '?valueProfile',
                 'TransferValueProfile/transferValueFrom',
@@ -208,14 +217,14 @@ function Desktop2() {
                 'LearningOpportunityProfile/ownedBy',
                 [
                   'CredentialOrganization/name',
-                  destInst || 'EASTERN KENTUCKY UNIVERSITY',
+                  instName || 'EASTERN KENTUCKY UNIVERSITY',
                 ],
               ],
-              [
-                '?newCourse',
-                'LearningOpportunityProfile/effectiveDate',
-                Number(year),
-              ],
+              // [
+              //   '?newCourse',
+              //   'LearningOpportunityProfile/effectiveDate',
+              //   Number(year),
+              // ],
             ],
             opts: {
               compact: true,
@@ -242,11 +251,11 @@ function Desktop2() {
                 'LearningOpportunityProfile/ownedBy',
                 ['CredentialOrganization/name', college],
               ],
-              [
-                '?course',
-                'LearningOpportunityProfile/effectiveDate',
-                Number(year),
-              ],
+              // [
+              //   '?course',
+              //   'LearningOpportunityProfile/effectiveDate',
+              //   Number(year),
+              // ],
               [
                 '?valueProfile',
                 'TransferValueProfile/transferValueFrom',
@@ -262,14 +271,14 @@ function Desktop2() {
                 'LearningOpportunityProfile/ownedBy',
                 [
                   'CredentialOrganization/name',
-                  destInst || 'EASTERN KENTUCKY UNIVERSITY',
+                  instName || 'EASTERN KENTUCKY UNIVERSITY',
                 ],
               ],
-              [
-                '?newCourse',
-                'LearningOpportunityProfile/effectiveDate',
-                Number(year),
-              ],
+              // [
+              //   '?newCourse',
+              //   'LearningOpportunityProfile/effectiveDate',
+              //   Number(year),
+              // ],
             ],
             opts: {
               compact: true,
@@ -454,16 +463,17 @@ function Desktop2() {
             </div>
           </div>
         )}
-        {/* {analysis && analysis.degreePlan && (
+        {analysis && analysis.degreePlan && (
           <div class='row'>
             <div className={classes.column}>
               <Typography variant='h4' className={classes.header}>
-                {analysis.degreePlan.length || '6'} Semesters at {destInst.label || 'Eastern Kentucky University'}
+                {analysis.degreePlan.length || '6'} Semesters at{' '}
+                {destInst.label || 'Eastern Kentucky University'}
               </Typography>
-              <Component planTermData={degreePlan} />
+              <Component planTermData={analysis.degreePlan} />
             </div>
           </div>
-        )} */}
+        )}
       </div>
     </div>
   );

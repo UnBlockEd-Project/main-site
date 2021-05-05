@@ -41,7 +41,7 @@ function Header({ className, ...rest }) {
             Home
           </Typography> */}
           <Typography component='h1' gutterBottom variant='h1'>
-            You Deserve Some Credit!
+            You Deserve All The Credit!
           </Typography>
           <Typography gutterBottom variant='h4'>
             UnBlockEd's Curricular Analytics platform is here to help you plan
